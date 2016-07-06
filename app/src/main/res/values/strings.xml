@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BaggageTracking</string>
+
+    <string name="title_label">BAGGAGE\nTRACKING</string>
+    <string name="input_label">Baggage #</string>
+    <string name="search_button">SEARCH</string>
+</resources>

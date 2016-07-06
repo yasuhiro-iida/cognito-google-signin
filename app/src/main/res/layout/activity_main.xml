@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="jp.co.ctc_g.baggagetracking.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#708090"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="@string/title_label"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/input_label"
+            android:textColor="#ffffff" />
+
+        <EditText
+            android:background="#ffffff"
+            android:id="@+id/input_baggage_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:hint="Type your baggage ID" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="#ff0000"
+            android:text="@string/search_button"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0, 1">
+
+        <TableRow
+            android:layout_marginTop="2dp"
+            android:background="#a9a9a9">
+
+            <TextView
+                android:layout_marginEnd="1dp"
+                android:background="#708090"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="ID/Status"
+                android:textStyle="bold" />
+
+            <TextView
+                android:background="#708090"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Owner/Updated At"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:background="#a9a9a9">
+
+            <TextView
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="1dp"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="NEW321\nDrop Off" />
+
+            <TextView
+                android:layout_marginBottom="1dp"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Japan International Airport\n2016/07/06 13:40" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="History" />
+
+        <ListView
+            android:dividerHeight="5dp"
+            android:divider="#ffffff"
+            android:id="@+id/history_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+    </LinearLayout>
+
+</LinearLayout>
