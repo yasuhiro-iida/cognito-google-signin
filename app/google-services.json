@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "431885225297",
+    "project_id": "baggage-tracking"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431885225297:android:beeb7d827779f218",
+        "android_client_info": {
+          "package_name": "jp.co.ctc_g.baggagetracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431885225297-ogj2gmhlmi8g22qcej0afk7tok0c0s3e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.co.ctc_g.baggagetracking",
+            "certificate_hash": "D3A83E35E3E3D4573EA2DBDD8FFBCF576422719A"
+          }
+        },
+        {
+          "client_id": "431885225297-mk0i7mvke68euoam5tcjoqqqt0ur8sd1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnvdy3C0IDpsUWas58cdTzuRqgH4gdVs0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

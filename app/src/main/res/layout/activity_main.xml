@@ -6,12 +6,25 @@
     android:orientation="vertical"
     tools:context="jp.co.ctc_g.baggagetracking.MainActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#708090"
         android:orientation="vertical"
         android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:onClick="jumpToLoginActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,14 +44,14 @@
             android:textColor="#ffffff" />
 
         <EditText
-            android:background="#ffffff"
             android:id="@+id/input_baggage_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:textSize="14sp"
+            android:background="#ffffff"
+            android:hint="Type your baggage ID"
             android:padding="8dp"
-            android:hint="Type your baggage ID" />
+            android:textSize="14sp" />
 
         <Button
             android:layout_width="match_parent"
@@ -95,10 +108,10 @@
     </TableLayout>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -107,11 +120,11 @@
             android:text="History" />
 
         <ListView
-            android:dividerHeight="5dp"
-            android:divider="#ffffff"
             android:id="@+id/history_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
+            android:layout_height="wrap_content"
+            android:divider="#ffffff"
+            android:dividerHeight="5dp"></ListView>
     </LinearLayout>
 
 </LinearLayout>

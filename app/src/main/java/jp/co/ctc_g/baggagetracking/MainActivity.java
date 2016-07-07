@@ -1,6 +1,7 @@
 package jp.co.ctc_g.baggagetracking;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -98,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
         public void setLocation(String location) {
             this.location = location;
         }
+    }
+
+    public void jumpToLoginActivity(View view) {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 
 }
