@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void jumpToLoginActivity(View view) {
-        Intent intent = new Intent(this, Login.class);
-        startActivity(intent);
+    public static Intent createIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
     }
 
 }

@@ -28,4 +28,5 @@ dependencies {
     compile 'com.amazonaws:aws-android-sdk-cognito:2.2.+'
     compile 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.2.+'
     compile 'com.google.android.gms:play-services-auth:8.3.0'
+    compile 'org.apache.commons:commons-lang3:3.4'
 }

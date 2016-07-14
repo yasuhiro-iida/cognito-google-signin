@@ -5,31 +5,26 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-import com.amazonaws.mobileconnectors.cognito.CognitoSyncManager;
-import com.amazonaws.mobileconnectors.cognito.Dataset;
-import com.amazonaws.mobileconnectors.cognito.DefaultSyncCallback;
 import com.amazonaws.regions.Regions;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
 public class Login extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private static final int RC_SIGN_IN = 1;
-    private static final String CLIENT_ID = "431885225297-mk0i7mvke68euoam5tcjoqqqt0ur8sd1.apps.googleusercontent.com";
-    private static final String GOOGLE_PROVIER = "accounts.google.com";
-    private TextView textView;
     private CognitoCachingCredentialsProvider credentialsProvider;
-    private CognitoSyncManager cognitoMng;
     private GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -37,11 +32,13 @@ public class Login extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
         findViewById(R.id.sign_in_button).setOnClickListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(CLIENT_ID)
+                .requestIdToken(Constants.CLIENT_ID)
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
@@ -50,43 +47,12 @@ public class Login extends AppCompatActivity
 
         credentialsProvider = new CognitoCachingCredentialsProvider(
                 getApplicationContext(),
-                "ap-northeast-1:57da617c-7e78-41e1-9a19-164bb1b0929a",
+                Constants.IDENTITY_POOL_ID,
                 Regions.AP_NORTHEAST_1);
 
-        textView = (TextView) findViewById(R.id.cognito_id);
-    }
-
-    public void getId(View view) {
-        new DatasetSyncTask().execute();
-    }
-
-    private class DatasetSyncTask extends AsyncTask<Void, Void, String> {
-        @Override
-        protected String doInBackground(Void... v) {
-            try {
-                String id = credentialsProvider.getIdentityId();
-                System.out.println("IdentityID: " + id);
-                return id;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return e.getMessage();
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            try {
-                cognitoMng = new CognitoSyncManager(
-                        getApplicationContext(),
-                        Regions.AP_NORTHEAST_1,
-                        credentialsProvider);
-                Dataset dataset = cognitoMng.openOrCreateDataset("tmpdataset");
-                dataset.put("myKey", "myValue2");
-                dataset.synchronize(new DefaultSyncCallback());
-                textView.setText(result);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        // Check if user logged in
+        if (isNotEmpty(credentialsProvider.getCachedIdentityId())) {
+            startActivity(MainActivity.createIntent(this));
         }
     }
 
@@ -123,10 +89,24 @@ public class Login extends AppCompatActivity
         if (result.isSuccess()) {
             GoogleSignInAccount account = result.getSignInAccount();
             Map<String, String> logins = new HashMap<>();
-            logins.put(GOOGLE_PROVIER, account.getIdToken());
+            logins.put(Constants.GOOGLE_PROVIER, account.getIdToken());
             credentialsProvider.setLogins(logins);
+            new GetCognitoCredentialsTask().execute();
         } else {
             System.out.println("Error" + result.getStatus().getStatusCode());
+        }
+    }
+
+    private class GetCognitoCredentialsTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                credentialsProvider.getIdentityId();
+                return null;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 }
